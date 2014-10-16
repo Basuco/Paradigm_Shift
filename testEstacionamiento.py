@@ -1,7 +1,13 @@
 
 import unittest
+import estacionamiento
 
 class Test(unittest.TestCase):
+
+    
+
+    def testTiempoACobrar(self):
+        pass
 
 
     def testName(self):
