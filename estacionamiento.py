@@ -1,3 +1,6 @@
+
+import sys
+
 def reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto):
     newEstadoEstacionamiento = None
     hayPuesto = None
@@ -20,7 +23,7 @@ def intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto):
             'placaPuesto': newPlacaPuesto,
             }
 
-def TiempoaCobrar(estadoEstacionamiento, placa, tiempoSalida, placaPuesto):
+def TiempoACobrar(estadoEstacionamiento, placa, tiempoSalida, placaPuesto):
     unidadesReservadoNoOcupado = None
     unidadesReservadoOcupado = None
     unidadesOcupado = None
@@ -39,3 +42,13 @@ def desocuparPuesto(estadoEstacionamiento, placa, horaSalida, placaPuesto):
             'puestoDesocupado': puestoDesocupado,
             'placaPuesto': newPlacaPuesto,
             }
+
+
+if __name__ == "__main__":
+
+    if len(sys.argv) > 1:
+        numeroPuestos = sys.argv[1]
+    else:
+        numeroPuestos = 2
+
+    estadoEstacionamiento  = [[0 for x in range(24)] for x in range(numeroPuestos)]
