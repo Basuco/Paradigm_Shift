@@ -24,9 +24,9 @@ def reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto):
         hayPuesto = true
         newPlacaPuesto[placa] = i
         puestoReservado = i
-        j= tiempoReservado[1]/30
+        j= tiempoReservado[1]
         while (j< len(newEstadoEstacionamiento[1])):
-            if (j<=(tiempoReservado[2]/30)):
+            if (j<=(tiempoReservado[2])):
                 newEstadoEstacionamiento[i][j]=2
             else:
                 newEstadoEstacionamiento[i][j]=1
