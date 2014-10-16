@@ -24,9 +24,13 @@ def intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto):
             }
 
 def TiempoACobrar(estadoEstacionamiento, placa, tiempoSalida, placaPuesto):
-    unidadesReservadoNoOcupado = None
-    unidadesReservadoOcupado = None
-    unidadesOcupado = None
+    if not(placa in placaPuesto):
+        unidadesReservadoNoOcupado = None
+        unidadesReservadoOcupado = None
+        unidadesOcupado = None
+    else:
+        puesto = placaPuesto[placa]
+
     return {
             'unidadesReservadoNoOcupado': unidadesReservadoNoOcupado,
             'unidadesReservadoOcupado': unidadesReservadoOcupado,
@@ -43,6 +47,21 @@ def desocuparPuesto(estadoEstacionamiento, placa, horaSalida, placaPuesto):
             'placaPuesto': newPlacaPuesto,
             }
 
+def intToHour(time):
+    posfix = ''
+
+    time = time * 30
+
+    if time % 60 == 0:
+        minutes = '00'
+    else:
+        minutes = '30'
+
+    hour = (time // 60 + 6)
+
+    hour = str(hour)
+
+    return hour + ':' + minutes + posfix
 
 if __name__ == "__main__":
 
