@@ -6,6 +6,39 @@ def reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto):
     hayPuesto = None
     puestoReservado = None
     newPlacaPuesto = None
+
+    vacio = false
+    i = 0
+    j = tiempoReservado[1]
+    while ((i < len(estadoEstacionamiento)) and (not vacio)):
+        if (estadoEstacionamiento[i][j] == 0):
+            j = j+1
+            vacio = true
+            while ((j<=(tiempoReservado[2]))and vacio):
+                if (estadoEstacionamiento[i][j] != 0):
+                    vacio = false
+                else:
+                    j = j+1
+        else:
+            i = i+1
+    if vacio:
+        newEstadoEstacionamiento = estadoEstacionamiento
+        newPlacaPuesto = placaPuesto
+        hayPuesto = true
+        newPlacaPuesto[placa] = i
+        puestoReservado = i
+        j= tiempoReservado[1]
+        while (j< len(newEstadoEstacionamiento[1])):
+            if (j<=(tiempoReservado[2])):
+                newEstadoEstacionamiento[i][j]=2
+            else:
+                newEstadoEstacionamiento[i][j]=1
+            j = j+1
+    else:
+        hayPuesto = false
+
+
+
     return {
             'estadoEstacionamiento': newEstadoEstacionamiento,
             'hayPuesto': hayPuesto,
