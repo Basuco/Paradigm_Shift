@@ -48,20 +48,21 @@ def TiempoaCobrar(estadoEstacionamiento, placa, tiempoSalida, placaPuesto):
             }
 
 def desocuparPuesto(estadoEstacionamiento, placa, horaSalida, placaPuesto):
-    newEstadoEstacionamiento = None
-    puestoDesocupado = None
-    newPlacaPuesto = None
-    
-    newEstadoEstacionamiento= list(estadoEstacionamiento)
-    puestoDesocupado= placaPuesto[placa]
-    newPlacaPuesto=placaPuesto.copy()
-    del newPlacaPuesto[placa]
-    
-    estadoPuesto= estadoEstacionamiento[puestoDesocupado][horaSalida]
-    if estadoPuesto == 1:
-        newEstadoEstacionamiento[puestoDesocupado][horaSalida]=0
-    elif estadoPuesto == 3: 
-        newEstadoEstacionamiento[puestoDesocupado][horaSalida]=2
+    newEstadoEstacionamiento= estadoEstacionamiento
+    newPlacaPuesto=dict(placaPuesto)
+    puestoDesocupado= placaPuesto[placa] #puesto a desocupar
+    if puestoDesocupado==None:
+        estadoPuesto=-1
+    else:
+        estadoPuesto= estadoEstacionamiento[puestoDesocupado][horaSalida]
+    if estadoPuesto == 1 or estadoPuesto == 3:
+        del newPlacaPuesto[placa]
+        for x in xrange(horaSalida+1):
+            actual=newEstadoEstacionamiento[puestoDesocupado][x]
+            if actual==1:
+                newEstadoEstacionamiento[puestoDesocupado][x]=0
+            elif actual==3:
+                newEstadoEstacionamiento[puestoDesocupado][x]=2
 
     return {
             'estadoEstacionamiento': newEstadoEstacionamiento,
