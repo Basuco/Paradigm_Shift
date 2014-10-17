@@ -141,23 +141,3 @@ def desocuparPuesto(estadoEstacionamiento, placa, horaSalida, placaPuesto):
             'placaPuesto': newPlacaPuesto,
             }
 
-if __name__ == "__main__":
-
-    if len(sys.argv) > 1:
-        numeroPuestos = sys.argv[1]
-    else:
-        numeroPuestos = 2
-
-    estadoEstacionamiento  = [[0 for x in range(24)] for x in range(numeroPuestos)]
-    puestoPlaca = {'a': 1}
-    estadoEstacionamiento[1][0] = 1
-    estadoEstacionamiento[1][1] = 2
-    estadoEstacionamiento[1][2] = 2
-    estadoEstacionamiento[1][3] = 3
-    estadoEstacionamiento[1][4] = 3
-    estadoEstacionamiento[1][5] = 3
-    estadoEstacionamiento[1][6] = 3
-    estadoEstacionamiento[1][7] = 1
-    estadoEstacionamiento[1][8] = 1
-    print(TiempoACobrar(estadoEstacionamiento, 'a', 8, puestoPlaca))
-

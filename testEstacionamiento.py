@@ -1,21 +1,9 @@
 
 import unittest
-<<<<<<< HEAD
-import estacionamiento
+import estacionamiento as es
 
 class Test(unittest.TestCase):
-
     
-
-    def testTiempoACobrar(self):
-        pass
-
-=======
-
-class Test(unittest.TestCase):
-
->>>>>>> desocuparPuesto
-
     def testName(self):
         pass
 
