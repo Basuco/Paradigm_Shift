@@ -1,5 +1,6 @@
 
 import unittest
+<<<<<<< HEAD
 import estacionamiento
 
 class Test(unittest.TestCase):
@@ -9,6 +10,11 @@ class Test(unittest.TestCase):
     def testTiempoACobrar(self):
         pass
 
+=======
+
+class Test(unittest.TestCase):
+
+>>>>>>> desocuparPuesto
 
     def testName(self):
         pass
