@@ -33,16 +33,20 @@ def TiempoACobrar(estadoEstacionamiento, placa, tiempoSalida, placaPuesto):
         unidadesReservadoNoOcupado = 0
         unidadesReservadoOcupado = 0
         unidadesOcupado = 0
-        print(estadoEstacionamiento[puesto])
+        last = -1
         for estado in estadoEstacionamiento[puesto][tiempoSalida::-1]:
             if estado == 0:
                 break
             elif estado == 1:
+                if last == 2 or last == 3:
+                    break;
                 unidadesOcupado = unidadesOcupado + 1
             elif estado == 2:
                 unidadesReservadoNoOcupado = unidadesReservadoNoOcupado + 1
             elif estado == 3:
                 unidadesReservadoOcupado = unidadesReservadoOcupado + 1
+
+            last = estado
 
     return {
             'unidadesReservadoNoOcupado': unidadesReservadoNoOcupado,
@@ -85,7 +89,7 @@ if __name__ == "__main__":
 
     estadoEstacionamiento  = [[0 for x in range(24)] for x in range(numeroPuestos)]
     puestoPlaca = {'a': 1}
-    estadoEstacionamiento[1][0] = 0
+    estadoEstacionamiento[1][0] = 1
     estadoEstacionamiento[1][1] = 2
     estadoEstacionamiento[1][2] = 2
     estadoEstacionamiento[1][3] = 3
