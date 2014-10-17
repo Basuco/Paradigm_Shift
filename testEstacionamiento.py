@@ -1,6 +1,6 @@
 
 import unittest
-import estacionamiento
+from estacionamiento import reservarPuesto
 
 class Test(unittest.TestCase):
 
@@ -39,7 +39,7 @@ class Test(unittest.TestCase):
         placaPuesto={}
         resul = {'estadoEstacionamiento': [[3]], 'hayPuesto': False, 'puestoReservado': None, 'placaPuesto': {}}
         self.assertEqual(resul,reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto))
-	#Se agrego para seguir el orden TDD
+    #Se agrego para seguir el orden TDD
     def testreservaPuesto_CeroConMas(self):
         estadoEstacionamiento = [[0,0],[0,0]]
         tiempoReservado=(0,0)
@@ -47,7 +47,7 @@ class Test(unittest.TestCase):
         placaPuesto={}
         resul = {'estadoEstacionamiento': [[2, 1], [0, 0]], 'hayPuesto': True, 'puestoReservado': 0, 'placaPuesto': {12: 0}}
         self.assertEqual(resul,reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto)) 
-	#Se agrego para seguir el orden TDD
+    #Se agrego para seguir el orden TDD
     def testreservaPuesto_CeroOcuparSegundoSinImportarValor(self):
         estadoEstacionamiento = [[0,2],[0,0]]
         tiempoReservado=(0,0)
@@ -55,7 +55,7 @@ class Test(unittest.TestCase):
         placaPuesto={}
         resul = {'estadoEstacionamiento': [[2, 1], [0, 0]], 'hayPuesto': True, 'puestoReservado': 0, 'placaPuesto': {12: 0}}
         self.assertEqual(resul,reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto)) 
-	#Se agrego para seguir el orden TDD    
+    #Se agrego para seguir el orden TDD    
     def testreservaPuesto_Cero2(self):
         estadoEstacionamiento = [[0,0],[0,0]]
         tiempoReservado=(0,1)
@@ -63,7 +63,7 @@ class Test(unittest.TestCase):
         placaPuesto={}
         resul = {'estadoEstacionamiento': [[2, 2], [0, 0]], 'hayPuesto': True, 'puestoReservado': 0, 'placaPuesto': {12: 0}}
         self.assertEqual(resul,reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto)) 
-	#Se agrego para seguir el orden TDD    
+    #Se agrego para seguir el orden TDD    
     def testreservaPuesto_OcuPrime(self):
         estadoEstacionamiento = [[1,0],[0,0]]
         tiempoReservado=(0,1)
@@ -71,7 +71,7 @@ class Test(unittest.TestCase):
         placaPuesto={}
         resul = {'estadoEstacionamiento': [[1, 0], [2, 2]], 'hayPuesto': True, 'puestoReservado': 1, 'placaPuesto': {12: 1}}
         self.assertEqual(resul,reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto))
-	#Se agrego para seguir el orden TDD    
+    #Se agrego para seguir el orden TDD    
     def testreservaPuesto_OcuAmbosFinal(self):
         estadoEstacionamiento = [[0,1],[0,1]]
         tiempoReservado=(0,1)
@@ -79,7 +79,7 @@ class Test(unittest.TestCase):
         placaPuesto={}
         resul = {'estadoEstacionamiento': [[0,1],[0,1]], 'hayPuesto': False, 'puestoReservado': None, 'placaPuesto': {}}
         self.assertEqual(resul,reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto))
-	#Malicia   
+    #Malicia   
     def testreservaPuesto_TiempoInicioMayorFinal(self):
         estadoEstacionamiento = [[1]]
         tiempoReservado=(1,0)
@@ -87,7 +87,7 @@ class Test(unittest.TestCase):
         placaPuesto={}
         resul = {'estadoEstacionamiento': [[1]], 'hayPuesto': False, 'puestoReservado': None, 'placaPuesto': {}}
         self.assertEqual(resul,reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto))
-	#Malicia   
+    #Malicia   
     def testreservaPuesto_MasTiempoDelValido(self):
         estadoEstacionamiento = [[1]]
         tiempoReservado=(0,4)
