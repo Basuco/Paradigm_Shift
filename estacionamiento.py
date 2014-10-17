@@ -62,13 +62,27 @@ def reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto):
             }
 
 def intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto):
-    newEstadoEstacionamiento = None
-    hayPuesto = None
-    newPlacaPuesto = None
+    newEstadoEstacionamiento = estadoEstacionamiento
+    hayPuesto = False
+    newPlacaPuesto = placaPuesto
+
+    i=1
+
+    while (i < len(newEstadoEstacionamiento)) and (not hayPuesto):
+
+        if (newEstadoEstacionamiento[i][horaLlegada] == 0):
+
+            newPlacaPuesto[placa] = i
+            hayPuesto = True
+            newEstadoEstacionamiento[i][horaLlegada] = 1
+
+        else:
+            i=i+1
+
     return {
             'estadoEstacionamiento': newEstadoEstacionamiento,
             'hayPuesto': hayPuesto,
-            'placaPuesto': newPlacaPuesto,
+            'placaPuesto': newPlacaPuesto
             }
 
 
