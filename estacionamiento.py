@@ -1,5 +1,3 @@
-import sys
-
 def intToHour(time):
     posfix = ''
 
@@ -15,6 +13,9 @@ def intToHour(time):
     hour = str(hour)
 
     return hour + ':' + minutes + posfix
+
+def getNuevoEstacionamiento(nroPuestos):
+    return [[0 for _ in range(24)] for _ in range(nroPuestos)]
 
 def reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto):
     newEstadoEstacionamiento = None
@@ -102,7 +103,7 @@ def TiempoACobrar(estadoEstacionamiento, placa, tiempoSalida, placaPuesto):
                 break
             elif estado == 1:
                 if last == 2 or last == 3:
-                    break;
+                    break
                 unidadesOcupado = unidadesOcupado + 1
             elif estado == 2:
                 unidadesReservadoNoOcupado = unidadesReservadoNoOcupado + 1
