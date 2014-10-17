@@ -1,6 +1,6 @@
 
 import unittest
-from estacionamiento import reservarPuesto, getNuevoEstacionamient
+from estacionamiento import reservarPuesto, getNuevoEstacionamiento
 
 class Test(unittest.TestCase):
 
