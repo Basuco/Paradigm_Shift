@@ -79,7 +79,7 @@ class Test(unittest.TestCase):
         placaPuesto={}
         resul = {'estadoEstacionamiento': [[1, 0], [2, 2]], 'hayPuesto': True, 'puestoReservado': 1, 'placaPuesto': {12: 1}}
         self.assertEqual(resul,reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto))
-    
+
 #Se agrego para seguir el orden TDD    
     def testreservaPuesto_OcuAmbosFinal(self):
         estadoEstacionamiento = [[0,1],[0,1]]
