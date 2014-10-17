@@ -107,6 +107,15 @@ class Test(unittest.TestCase):
         resul = {'estadoEstacionamiento': [[1]], 'hayPuesto': False, 'puestoReservado': None, 'placaPuesto': {}}
         self.assertEqual(resul,reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto))
 
+#Malicia   
+    def testreservaPuesto_MasTiempoDelValidoExtendido(self):
+        estadoEstacionamiento = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
+        tiempoReservado=(0,40)
+        placa = 12
+        placaPuesto={}
+        resul = {'estadoEstacionamiento': [[1]], 'hayPuesto': False, 'puestoReservado': None, 'placaPuesto': {}}
+        self.assertEqual(resul,reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto))
+
     def testTiempoACobrar(self):
         pass
 
