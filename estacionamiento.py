@@ -1,5 +1,4 @@
 def intToHour(time):
-    posfix = ''
 
     time = time * 30
 
@@ -12,10 +11,11 @@ def intToHour(time):
 
     hour = str(hour)
 
-    return hour + ':' + minutes + posfix
+    return hour + ':' + minutes
 
 def getNuevoEstacionamiento(nroPuestos):
     return [[0 for _ in range(24)] for _ in range(nroPuestos)]
+
 
 def reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto):
     newEstadoEstacionamiento = None
@@ -85,7 +85,6 @@ def intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto):
             'hayPuesto': hayPuesto,
             'placaPuesto': newPlacaPuesto
             }
-
 
 def TiempoACobrar(estadoEstacionamiento, placa, tiempoSalida, placaPuesto):
     if not(placa in placaPuesto):
