@@ -67,16 +67,16 @@ def intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto):
     hayPuesto = False
     newPlacaPuesto = placaPuesto
 
-    i=1
-
+    i=0
+    
     while (i < len(newEstadoEstacionamiento)) and (not hayPuesto):
 
         if (newEstadoEstacionamiento[i][horaLlegada] == 0):
-
+            
             newPlacaPuesto[placa] = i
             hayPuesto = True
             newEstadoEstacionamiento[i][horaLlegada] = 1
-
+  
         else:
             i=i+1
 
@@ -85,7 +85,6 @@ def intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto):
             'hayPuesto': hayPuesto,
             'placaPuesto': newPlacaPuesto
             }
-
 
 def TiempoACobrar(estadoEstacionamiento, placa, tiempoSalida, placaPuesto):
     if not(placa in placaPuesto):
