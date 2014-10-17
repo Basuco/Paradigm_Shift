@@ -2,19 +2,26 @@
 import sys
 
 def reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto):
-    newEstadoEstacionamiento = None
     hayPuesto = None
     puestoReservado = None
-    newPlacaPuesto = None
+    
+    newEstadoEstacionamiento = estadoEstacionamiento
+    newPlacaPuesto = placaPuesto
+    
+    
 
     vacio = False
+    if ((tiempoReservado[0]>tiempoReservado[1])or (tiempoReservado[1]>= len(estadoEstacionamiento[0]))):
+        valido = False
+    else:
+        valido = True
     i = 0
-    j = tiempoReservado[1]
-    while ((i < len(estadoEstacionamiento)) and (not vacio)):
+    j = tiempoReservado[0]
+    while ((i < len(estadoEstacionamiento)) and (not vacio) and (valido)):
         if (estadoEstacionamiento[i][j] == 0):
             j = j+1
             vacio = True
-            while ((j<=(tiempoReservado[2]))and vacio):
+            while ((j<=(tiempoReservado[1]))and vacio):
                 if (estadoEstacionamiento[i][j] != 0):
                     vacio = False
                 else:
@@ -22,14 +29,13 @@ def reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto):
         else:
             i = i+1
     if vacio:
-        newEstadoEstacionamiento = estadoEstacionamiento
-        newPlacaPuesto = placaPuesto
+
         hayPuesto = True
         newPlacaPuesto[placa] = i
         puestoReservado = i
-        j= tiempoReservado[1]
-        while (j< len(newEstadoEstacionamiento[1])):
-            if (j<=(tiempoReservado[2])):
+        j= tiempoReservado[0]
+        while (j< len(newEstadoEstacionamiento[0])):
+            if (j<=(tiempoReservado[1])):
                 newEstadoEstacionamiento[i][j]=2
             else:
                 newEstadoEstacionamiento[i][j]=1
@@ -118,17 +124,11 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         numeroPuestos = sys.argv[1]
     else:
-        numeroPuestos = 2
-
-    estadoEstacionamiento  = [[0 for x in range(24)] for x in range(numeroPuestos)]
-    puestoPlaca = {'a': 1}
-    estadoEstacionamiento[1][0] = 1
-    estadoEstacionamiento[1][1] = 2
-    estadoEstacionamiento[1][2] = 2
-    estadoEstacionamiento[1][3] = 3
-    estadoEstacionamiento[1][4] = 3
-    estadoEstacionamiento[1][5] = 3
-    estadoEstacionamiento[1][6] = 3
-    estadoEstacionamiento[1][7] = 1
-    estadoEstacionamiento[1][8] = 1
-    print(TiempoACobrar(estadoEstacionamiento, 'a', 8, puestoPlaca))
+        
+        estadoEstacionamiento = [[0,0],[0,0]]
+        tiempoReservado=(0,1)
+        placa = 12
+        placaPuesto={}
+        resultado=None
+        resultado = reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto)
+        print resultado
