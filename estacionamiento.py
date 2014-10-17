@@ -13,7 +13,7 @@ def reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto):
     while ((i < len(estadoEstacionamiento)) and (not vacio)):
         if (estadoEstacionamiento[i][j] == 0):
             j = j+1
-            vacio = true
+            vacio = True
             while ((j<=(tiempoReservado[2]))and vacio):
                 if (estadoEstacionamiento[i][j] != 0):
                     vacio = False
