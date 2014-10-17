@@ -1,31 +1,26 @@
-<<<<<<< HEAD
-
 import sys
-=======
+
 def intToHour(time):
-   posfix = ''
+    posfix = ''
 
-   if time > 12:
-       posfix = 'pm'
-   else:
-       posfix = 'am'
+    time = time * 30
 
-   hour = str(time % 12 + 6)
+    if time % 60 == 0:
+        minutes = '00'
+    else:
+        minutes = '30'
 
-   if time % 2 == 0:
-       minutes = '00'
-   else:
-       minutes = '30'
+    hour = (time // 60 + 6)
 
-   return hour + ':' + minutes + posfix
->>>>>>> desocuparPuesto
+    hour = str(hour)
+
+    return hour + ':' + minutes + posfix
 
 def reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto):
     newEstadoEstacionamiento = None
     hayPuesto = None
     puestoReservado = None
     newPlacaPuesto = None
-<<<<<<< HEAD
 
     vacio = False
     i = 0
@@ -59,8 +54,6 @@ def reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto):
 
 
 
-=======
->>>>>>> desocuparPuesto
     return {
             'estadoEstacionamiento': newEstadoEstacionamiento,
             'hayPuesto': hayPuesto,
@@ -78,7 +71,7 @@ def intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto):
             'placaPuesto': newPlacaPuesto,
             }
 
-<<<<<<< HEAD
+
 def TiempoACobrar(estadoEstacionamiento, placa, tiempoSalida, placaPuesto):
     if not(placa in placaPuesto):
         unidadesReservadoNoOcupado = None
@@ -104,12 +97,6 @@ def TiempoACobrar(estadoEstacionamiento, placa, tiempoSalida, placaPuesto):
 
             last = estado
 
-=======
-def TiempoaCobrar(estadoEstacionamiento, placa, tiempoSalida, placaPuesto):
-    unidadesReservadoNoOcupado = None
-    unidadesReservadoOcupado = None
-    unidadesOcupado = None
->>>>>>> desocuparPuesto
     return {
             'unidadesReservadoNoOcupado': unidadesReservadoNoOcupado,
             'unidadesReservadoOcupado': unidadesReservadoOcupado,
@@ -117,11 +104,7 @@ def TiempoaCobrar(estadoEstacionamiento, placa, tiempoSalida, placaPuesto):
             }
 
 def desocuparPuesto(estadoEstacionamiento, placa, horaSalida, placaPuesto):
-<<<<<<< HEAD
-    newEstadoEstacionamiento = None
-    puestoDesocupado = None
-    newPlacaPuesto = None
-=======
+
     newEstadoEstacionamiento= estadoEstacionamiento
     newPlacaPuesto=dict(placaPuesto)
     puestoDesocupado= placaPuesto[placa] #puesto a desocupar
@@ -131,36 +114,18 @@ def desocuparPuesto(estadoEstacionamiento, placa, horaSalida, placaPuesto):
         estadoPuesto= estadoEstacionamiento[puestoDesocupado][horaSalida]
     if estadoPuesto == 1 or estadoPuesto == 3:
         del newPlacaPuesto[placa]
-        for x in xrange(horaSalida+1):
+        for x in range(horaSalida+1):
             actual=newEstadoEstacionamiento[puestoDesocupado][x]
             if actual==1:
                 newEstadoEstacionamiento[puestoDesocupado][x]=0
             elif actual==3:
                 newEstadoEstacionamiento[puestoDesocupado][x]=2
 
->>>>>>> desocuparPuesto
     return {
             'estadoEstacionamiento': newEstadoEstacionamiento,
             'puestoDesocupado': puestoDesocupado,
             'placaPuesto': newPlacaPuesto,
-<<<<<<< HEAD
             }
-
-def intToHour(time):
-    posfix = ''
-
-    time = time * 30
-
-    if time % 60 == 0:
-        minutes = '00'
-    else:
-        minutes = '30'
-
-    hour = (time // 60 + 6)
-
-    hour = str(hour)
-
-    return hour + ':' + minutes + posfix
 
 if __name__ == "__main__":
 
@@ -181,6 +146,4 @@ if __name__ == "__main__":
     estadoEstacionamiento[1][7] = 1
     estadoEstacionamiento[1][8] = 1
     print(TiempoACobrar(estadoEstacionamiento, 'a', 8, puestoPlaca))
-=======
-            }
->>>>>>> desocuparPuesto
+
