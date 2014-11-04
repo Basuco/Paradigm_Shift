@@ -123,8 +123,12 @@ def TiempoACobrar(estadoEstacionamiento, placa, tiempoSalida, placaPuesto):
 def desocuparPuesto(estadoEstacionamiento, placa, horaSalida, placaPuesto):
 
     newEstadoEstacionamiento= estadoEstacionamiento
-    newPlacaPuesto=dict(placaPuesto)
-    puestoDesocupado= placaPuesto[placa] #puesto a desocupar
+    if placaPuesto!=None:
+        newPlacaPuesto=dict(placaPuesto)
+        puestoDesocupado= placaPuesto[placa] #puesto a desocupar
+    else:
+        puestoDesocupado=None
+        
     if puestoDesocupado==None:
         estadoPuesto=-1
     else:
@@ -137,7 +141,8 @@ def desocuparPuesto(estadoEstacionamiento, placa, horaSalida, placaPuesto):
                 newEstadoEstacionamiento[puestoDesocupado][x]=0
             elif actual==3:
                 newEstadoEstacionamiento[puestoDesocupado][x]=2
-
+    else:
+        puestoDesocupado=None;
     return {
             'estadoEstacionamiento': newEstadoEstacionamiento,
             'puestoDesocupado': puestoDesocupado,
