@@ -458,7 +458,7 @@ class Test(unittest.TestCase):
         self.assertEqual(resultado,desocuparPuesto(estadoEstacionamientoInicial,placa,horaSalida,placaPuesto))
 
 ############################################################################
-#		PRUEBA INTEGRACION 1-2
+#		PRUEBAS INTEGRACION
 ############################################################################
 
     def testIntegracion12OcuPrime(self):
