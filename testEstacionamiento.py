@@ -4,7 +4,7 @@ from estacionamiento import *
 
 class Test(unittest.TestCase):
 
-##############################################################################
+############################################################################
 #		PRUEBA FUNCION 1 reservarPuesto
 ############################################################################
 
@@ -62,7 +62,6 @@ class Test(unittest.TestCase):
         resul = {'estadoEstacionamiento': [[2, 1], [0, 0]], 'hayPuesto': True, 'puestoReservado': 0, 'placaPuesto': {12: 0}}
         self.assertEqual(resul,reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto)) 
 
-
 #Se agrego para seguir el orden TDD    
     def testreservaPuesto_Cero2(self):
         estadoEstacionamiento = [[0,0],[0,0]]
@@ -118,10 +117,90 @@ class Test(unittest.TestCase):
         resul = {'estadoEstacionamiento': estadoEstacionamiento, 'hayPuesto': False, 'puestoReservado': None, 'placaPuesto': {}}
         self.assertEqual(resul,reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto))
         
+############################################################################
+#		PRUEBA FUNCION 2 intentarEstacionar
+############################################################################
+
+        #Estacionamiento: 1 puesto, Estado: Libre, Hora: 0 == "6:00"
+    def testintentarEstacionar_Cero(self):
+        estadoEstacionamiento = [[0]]
+        horaLlegada = 0  
+        placa = 13 
+        placaPuesto={}
+        resul = {'estadoEstacionamiento': [[1]], 'hayPuesto': True, 'placaPuesto': {13: 0}}
+        self.assertEqual(resul,intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto))
+
+    #Estacionamiento: 1 puesto, Estado: Ocupado, Hora: 0 == "6:00"
+    def testintentarEstacionar_Ocu1(self):
+        estadoEstacionamiento = [[1]]
+        horaLlegada = 0
+        placa = 13
+        placaPuesto={}
+        resul = {'estadoEstacionamiento': [[1]], 'hayPuesto': False, 'placaPuesto': {}}
+        self.assertEqual(resul,intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto))
+    
+    #Estacionamiento: 1 puesto, Estado: Reservado Desocupado, Hora: 0 == "6:00"
+    def testintentarEstacionar_Ocu2(self):
+        estadoEstacionamiento = [[2]]
+        horaLlegada = 0 
+        placa = 13
+        placaPuesto={}
+        resul = {'estadoEstacionamiento': [[2]], 'hayPuesto': False, 'placaPuesto': {}}
+        self.assertEqual(resul,intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto))
         
+    #Estacionamiento: 1 puesto, Estado: Reservado desocupado, Hora: 0 == "6:00"
+    def testintentarEstacionar_Ocu3(self):
+        estadoEstacionamiento = [[3]]
+        horaLlegada = 0 
+        placa = 13
+        placaPuesto={}
+        resul = {'estadoEstacionamiento': [[3]], 'hayPuesto': False, 'placaPuesto': {}}
+        self.assertEqual(resul,intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto))   
         
+    #Estacionamiento: 2 puestos, Estado: Todos libres, Hora: 1 == "6:30"
+    def testintentarEstacionar_LibresHora(self):
+        estadoEstacionamiento = [[0,0],[0,0]]
+        horaLlegada = 1 
+        placa = 13
+        placaPuesto={}
+        resul = {'estadoEstacionamiento': [[0, 1], [0, 0]], 'hayPuesto': True,'placaPuesto': {13: 0}}
+        self.assertEqual(resul,intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto))  
         
-##############################################################################
+    #Estacionamiento: 2 puestos, Estado: Hay un puesto Reservado Desocupado a la hora de entrada, Hora: 1 == "6:30"    
+    def testintentarEstacionar_OcuparLibre(self):
+        estadoEstacionamiento = [[0,2],[0,0]]
+        horaLlegada = 1 
+        placa = 13
+        placaPuesto={}
+        resul = {'estadoEstacionamiento': [[0, 2], [0, 1]], 'hayPuesto': True,'placaPuesto': {13: 1}}
+        self.assertEqual(resul,intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto)) 
+    
+    #Estacionamiento: 2 puestos, Estado: Todos ocupados de alguna manera, Hora: 1 == "6:30" 
+    def testintentarEstacionar_TodoOcu(self):
+        estadoEstacionamiento = [[1,1],[2,3]]
+        horaLlegada = 1
+        placa = 12
+        placaPuesto={}
+        resul = {'estadoEstacionamiento': [[1, 1], [2, 3]], 'hayPuesto': False, 'placaPuesto': {}}
+        self.assertEqual(resul,intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto))
+
+    #Malicia   
+    def testrintentarEstacionar_MasTiempoDelValido(self):
+        estadoEstacionamiento = [[1]]
+        horaLlegada = 30
+        placa = 13
+        placaPuesto={}
+        resul = {'estadoEstacionamiento': [[1]], 'hayPuesto': False, 'placaPuesto': {}}
+        self.assertEqual(resul,intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto))
+        
+############################################################################
+#		PRUEBA FUNCION 3 tiempoACobrar
+############################################################################
+
+    def testTiempoACobrar(self):
+        pass
+
+############################################################################
 #		PRUEBA FUNCION 4 desocuparPuesto
 ############################################################################
 
@@ -201,6 +280,7 @@ class Test(unittest.TestCase):
         placa=1234
         for x in xrange(horaSalida+1):
             estadoEstacionamientoInicial[puesto][x]=1
+        placaPuesto={}
         placaPuesto[placa]=puesto
         placaPuesto[placa+1]=puesto+1
         placaPuestoF={}
@@ -208,19 +288,32 @@ class Test(unittest.TestCase):
         resultado = {
             'estadoEstacionamiento': estadoEstacionamientoFinal,
             'puestoDesocupado': puesto,
-            'placaPuesto': {},
+            'placaPuesto': placaPuestoF,
             }
-        self.maxDiff=None
         self.assertEqual(resultado,desocuparPuesto(estadoEstacionamientoInicial,placa,horaSalida,placaPuesto))
         
-        
-
-    def testTiempoACobrar(self):
-        pass
-
-
-    def testName(self):
-        pass
+    def testDesocuparPuestoOcupadoTodoElDia(self):
+        estadoEstacionamientoInicial = getNuevoEstacionamiento(12)
+        estadoEstacionamientoFinal = getNuevoEstacionamiento(12)
+        horaSalida=6
+        puesto=1
+        placa=1234
+        for x in xrange(horaSalida+1):
+            estadoEstacionamientoInicial[puesto][x]=1
+        for x in xrange(12):
+            estadoEstacionamientoInicial[puesto+1][x]=1
+            estadoEstacionamientoFinal[puesto+1][x]=1
+        placaPuesto={}
+        placaPuesto[placa]=puesto
+        placaPuesto[placa+1]=puesto+1
+        placaPuestoF={}
+        placaPuestoF[placa+1]=puesto+1
+        resultado = {
+            'estadoEstacionamiento': estadoEstacionamientoFinal,
+            'puestoDesocupado': puesto,
+            'placaPuesto': placaPuestoF,
+            }
+        self.assertEqual(resultado,desocuparPuesto(estadoEstacionamientoInicial,placa,horaSalida,placaPuesto))
 
 
 if __name__ == "__main__":

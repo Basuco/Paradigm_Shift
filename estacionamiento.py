@@ -70,18 +70,18 @@ def intentarEstacionar(estadoEstacionamiento, placa, horaLlegada, placaPuesto):
     hayPuesto = False
     newPlacaPuesto = placaPuesto
 
-    i=1
+    if (horaLlegada <= 25) & (horaLlegada >= 0 ):
+        i=0
+        while (i < len(newEstadoEstacionamiento)) and (not hayPuesto):
+    
+            if (newEstadoEstacionamiento[i][horaLlegada] == 0):
+                newPlacaPuesto[placa] = i
+                hayPuesto = True
+                newEstadoEstacionamiento[i][horaLlegada] = 1
+          
+            else:
+                i=i+1
 
-    while (i < len(newEstadoEstacionamiento)) and (not hayPuesto):
-
-        if (newEstadoEstacionamiento[i][horaLlegada] == 0):
-
-            newPlacaPuesto[placa] = i
-            hayPuesto = True
-            newEstadoEstacionamiento[i][horaLlegada] = 1
-
-        else:
-            i=i+1
 
     return {
             'estadoEstacionamiento': newEstadoEstacionamiento,
