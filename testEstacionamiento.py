@@ -197,9 +197,151 @@ class Test(unittest.TestCase):
 #		PRUEBA FUNCION 3 tiempoACobrar
 ############################################################################
 
-    def testTiempoACobrar(self):
-        pass
+    def testTiempoACobrarUnOcupado(self):
+        estadoEstacionamientoInicial = getNuevoEstacionamiento(12)
+        estadoEstacionamientoFinal = getNuevoEstacionamiento(12)
+        placa=14
+        puesto=3
+        placaPuesto={placa:puesto}
+        tiempoSalida=6
+        estadoEstacionamientoInicial[puesto][tiempoSalida]=1
+        resultado = {
+            'unidadesReservadoNoOcupado': 0,
+            'unidadesReservadoOcupado': 0,
+            'unidadesOcupado': 1,
+            }
+        resultadoF=TiempoACobrar(estadoEstacionamientoInicial,placa,tiempoSalida,placaPuesto)
+        self.assertEqual(resultado,resultadoF)
+        
+    def testTiempoACobrarOcupadoDesdeInicio(self):
+        estadoEstacionamientoInicial = getNuevoEstacionamiento(12)
+        estadoEstacionamientoFinal = getNuevoEstacionamiento(12)
+        placa=14
+        puesto=3
+        placaPuesto={placa:puesto}
+        tiempoSalida=6
+        for x in xrange(tiempoSalida+1):
+            estadoEstacionamientoInicial[puesto][x]=1
+        resultado = {
+            'unidadesReservadoNoOcupado': 0,
+            'unidadesReservadoOcupado': 0,
+            'unidadesOcupado': 7,
+            }
+        resultadoF=TiempoACobrar(estadoEstacionamientoInicial,placa,tiempoSalida,placaPuesto)
+        self.assertEqual(resultado,resultadoF)
+        
+    def testTiempoACobrarReservadoOcupado(self):
+        estadoEstacionamientoInicial = getNuevoEstacionamiento(12)
+        estadoEstacionamientoFinal = getNuevoEstacionamiento(12)
+        placa=14
+        puesto=3
+        placaPuesto={placa:puesto}
+        tiempoSalida=6
+        for x in xrange(tiempoSalida+1):
+            estadoEstacionamientoInicial[puesto][x]=3
+        resultado = {
+            'unidadesReservadoNoOcupado': 0,
+            'unidadesReservadoOcupado': tiempoSalida+1,
+            'unidadesOcupado': 0,
+            }
+        resultadoF=TiempoACobrar(estadoEstacionamientoInicial,placa,tiempoSalida,placaPuesto)
+        self.assertEqual(resultado,resultadoF)
+        
+    def testTiempoACobrarNoDesdeInicio(self):
+        estadoEstacionamientoInicial = getNuevoEstacionamiento(12)
+        estadoEstacionamientoFinal = getNuevoEstacionamiento(12)
+        placa=14
+        puesto=3
+        placaPuesto={placa:puesto}
+        tiempoSalida=6
+        for x in xrange(tiempoSalida+1):
+            estadoEstacionamientoInicial[puesto][x]=1
+        estadoEstacionamientoInicial[puesto][0]=0
+        resultado = {
+            'unidadesReservadoNoOcupado': 0,
+            'unidadesReservadoOcupado': 0,
+            'unidadesOcupado': tiempoSalida,
+            }
+        resultadoF=TiempoACobrar(estadoEstacionamientoInicial,placa,tiempoSalida,placaPuesto)
+        self.assertEqual(resultado,resultadoF)
+        
+    def testTiempoACobrarNoDesdeInicioConReservas(self):
+        estadoEstacionamientoInicial = getNuevoEstacionamiento(12)
+        estadoEstacionamientoFinal = getNuevoEstacionamiento(12)
+        placa=14
+        puesto=3
+        placaPuesto={placa:puesto}
+        tiempoSalida=6
+        for x in xrange(tiempoSalida+1):
+            estadoEstacionamientoInicial[puesto][x]=3
+        estadoEstacionamientoInicial[puesto][0]=0
+        resultado = {
+            'unidadesReservadoNoOcupado': 0,
+            'unidadesReservadoOcupado': tiempoSalida,
+            'unidadesOcupado': 0,
+            }
+        resultadoF=TiempoACobrar(estadoEstacionamientoInicial,placa,tiempoSalida,placaPuesto)
+        self.assertEqual(resultado,resultadoF)
 
+    def testTiempoACobrarNoDesdeInicioConReservas2(self):
+        estadoEstacionamientoInicial = getNuevoEstacionamiento(12)
+        estadoEstacionamientoFinal = getNuevoEstacionamiento(12)
+        placa=14
+        puesto=3
+        placaPuesto={placa:puesto}
+        tiempoSalida=6
+        for x in xrange(tiempoSalida+1):
+            estadoEstacionamientoInicial[puesto][x]=3
+        estadoEstacionamientoInicial[puesto][0]=2
+        resultado = {
+            'unidadesReservadoNoOcupado': 1,
+            'unidadesReservadoOcupado': tiempoSalida,
+            'unidadesOcupado': 0,
+            }
+        resultadoF=TiempoACobrar(estadoEstacionamientoInicial,placa,tiempoSalida,placaPuesto)
+        self.assertEqual(resultado,resultadoF)
+
+    def testTiempoACobrarNoDesdeInicioConReservas3(self):
+        estadoEstacionamientoInicial = getNuevoEstacionamiento(12)
+        estadoEstacionamientoFinal = getNuevoEstacionamiento(12)
+        placa=14
+        puesto=3
+        placaPuesto={placa:puesto}
+        tiempoSalida=6
+        for x in xrange(tiempoSalida+1):
+            estadoEstacionamientoInicial[puesto][x]=3
+        estadoEstacionamientoInicial[puesto][0]=2
+        estadoEstacionamientoInicial[puesto][1]=2
+        resultado = {
+            'unidadesReservadoNoOcupado': 2,
+            'unidadesReservadoOcupado': tiempoSalida-1,
+            'unidadesOcupado': 0,
+            }
+        resultadoF=TiempoACobrar(estadoEstacionamientoInicial,placa,tiempoSalida,placaPuesto)
+        self.assertEqual(resultado,resultadoF)
+    
+    #malicia
+    def testTiempoACobrarNoDesdeInicioConReservas4(self):
+        estadoEstacionamientoInicial = getNuevoEstacionamiento(12)
+        estadoEstacionamientoFinal = getNuevoEstacionamiento(12)
+        placa=14
+        puesto=3
+        placaPuesto={placa:puesto}
+        tiempoSalida=6
+        for x in xrange(tiempoSalida+1):
+            estadoEstacionamientoInicial[puesto][x]=3
+        estadoEstacionamientoInicial[puesto][0]=2
+        estadoEstacionamientoInicial[puesto][1]=0
+        estadoEstacionamientoInicial[puesto][2]=2
+        resultado = {
+            'unidadesReservadoNoOcupado': 1,
+            'unidadesReservadoOcupado': tiempoSalida-2,
+            'unidadesOcupado': 0,
+            }
+        resultadoF=TiempoACobrar(estadoEstacionamientoInicial,placa,tiempoSalida,placaPuesto)
+        self.assertEqual(resultado,resultadoF)
+
+        
 ############################################################################
 #		PRUEBA FUNCION 4 desocuparPuesto
 ############################################################################
@@ -315,6 +457,49 @@ class Test(unittest.TestCase):
             }
         self.assertEqual(resultado,desocuparPuesto(estadoEstacionamientoInicial,placa,horaSalida,placaPuesto))
 
+############################################################################
+#		PRUEBA INTEGRACION 1-2
+############################################################################
+
+    def testIntegracion12OcuPrime(self):
+        estadoEstacionamiento = [[1,0],[0,0]]
+        tiempoReservado=(0,1)
+        placa = 12
+        placaPuesto={}
+        horaLlegada=1
+        resul = reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto)
+        resul2 = intentarEstacionar(resul['estadoEstacionamiento'], placa, horaLlegada, resul['placaPuesto'])
+        resulF = {'estadoEstacionamiento': [[1, 1], [2, 2]], 'hayPuesto': True, 'placaPuesto': {12: 0}}
+        self.assertEqual(resulF,resul2)
+
+    def testIntegracion123OcuPrime(self):
+        estadoEstacionamiento = [[1,0],[0,0],[0,0]]
+        tiempoReservado=(0,1)
+        placa = 12
+        placaPuesto={}
+        horaLlegada=1
+        resul = reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto)
+        resul2 = intentarEstacionar(resul['estadoEstacionamiento'], placa, horaLlegada, resul['placaPuesto'])
+        tiempoSalida=2
+        resul3 = TiempoACobrar(resul2['estadoEstacionamiento'], placa, tiempoSalida, resul2['placaPuesto'])
+        resulF={'unidadesReservadoNoOcupado': 0, 'unidadesReservadoOcupado': 0, 'unidadesOcupado': 2}
+        self.assertEqual(resulF,resul3)
+
+    def testIntegracion1234OcuPrime(self):
+        estadoEstacionamiento = [[1,0],[0,0],[0,0]]
+        tiempoReservado=(0,1)
+        placa = 12
+        placaPuesto={}
+        horaLlegada=1
+        resul = reservarPuesto(estadoEstacionamiento, tiempoReservado, placa, placaPuesto)
+        resul2 = intentarEstacionar(resul['estadoEstacionamiento'], placa, horaLlegada, resul['placaPuesto'])
+        tiempoSalida=2
+        resul3 = TiempoACobrar(resul['estadoEstacionamiento'], placa, tiempoSalida, placaPuesto)
+        horaSalida=tiempoSalida-1
+        resul4 = desocuparPuesto(resul2['estadoEstacionamiento'], placa, horaSalida, resul2['placaPuesto'])
+        resulF = {'estadoEstacionamiento': [[0, 0], [2, 2], [0, 0]], 'puestoDesocupado': 0, 'placaPuesto': {}}
+        self.assertEqual(resulF,resul4)
+        
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
