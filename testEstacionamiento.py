@@ -220,7 +220,7 @@ class Test(unittest.TestCase):
         puesto=3
         placaPuesto={placa:puesto}
         tiempoSalida=6
-        for x in xrange(tiempoSalida+1):
+        for x in range(tiempoSalida+1):
             estadoEstacionamientoInicial[puesto][x]=1
         resultado = {
             'unidadesReservadoNoOcupado': 0,
@@ -237,7 +237,7 @@ class Test(unittest.TestCase):
         puesto=3
         placaPuesto={placa:puesto}
         tiempoSalida=6
-        for x in xrange(tiempoSalida+1):
+        for x in range(tiempoSalida+1):
             estadoEstacionamientoInicial[puesto][x]=3
         resultado = {
             'unidadesReservadoNoOcupado': 0,
@@ -254,7 +254,7 @@ class Test(unittest.TestCase):
         puesto=3
         placaPuesto={placa:puesto}
         tiempoSalida=6
-        for x in xrange(tiempoSalida+1):
+        for x in range(tiempoSalida+1):
             estadoEstacionamientoInicial[puesto][x]=1
         estadoEstacionamientoInicial[puesto][0]=0
         resultado = {
@@ -272,7 +272,7 @@ class Test(unittest.TestCase):
         puesto=3
         placaPuesto={placa:puesto}
         tiempoSalida=6
-        for x in xrange(tiempoSalida+1):
+        for x in range(tiempoSalida+1):
             estadoEstacionamientoInicial[puesto][x]=3
         estadoEstacionamientoInicial[puesto][0]=0
         resultado = {
@@ -290,7 +290,7 @@ class Test(unittest.TestCase):
         puesto=3
         placaPuesto={placa:puesto}
         tiempoSalida=6
-        for x in xrange(tiempoSalida+1):
+        for x in range(tiempoSalida+1):
             estadoEstacionamientoInicial[puesto][x]=3
         estadoEstacionamientoInicial[puesto][0]=2
         resultado = {
@@ -308,7 +308,7 @@ class Test(unittest.TestCase):
         puesto=3
         placaPuesto={placa:puesto}
         tiempoSalida=6
-        for x in xrange(tiempoSalida+1):
+        for x in range(tiempoSalida+1):
             estadoEstacionamientoInicial[puesto][x]=3
         estadoEstacionamientoInicial[puesto][0]=2
         estadoEstacionamientoInicial[puesto][1]=2
@@ -328,7 +328,7 @@ class Test(unittest.TestCase):
         puesto=3
         placaPuesto={placa:puesto}
         tiempoSalida=6
-        for x in xrange(tiempoSalida+1):
+        for x in range(tiempoSalida+1):
             estadoEstacionamientoInicial[puesto][x]=3
         estadoEstacionamientoInicial[puesto][0]=2
         estadoEstacionamientoInicial[puesto][1]=0
@@ -347,8 +347,8 @@ class Test(unittest.TestCase):
 ############################################################################
 
     def testDesocuparSinPuestoOcupado(self):
-        estadoEstacionamientoInicial = [[0 for x in xrange(8)] for x in xrange(5)]
-        estadoEstacionamientoFinal = [[0 for x in xrange(8)] for x in xrange(5)] 
+        estadoEstacionamientoInicial = [[0 for x in range(8)] for x in range(5)]
+        estadoEstacionamientoFinal = [[0 for x in range(8)] for x in range(5)] 
         horaSalida=6
         puesto=3
         placa=1234
@@ -362,8 +362,8 @@ class Test(unittest.TestCase):
         self.assertEqual(resultado,resultadoF)
         
     def testDesocuparSinPuestoOcupadoReservado(self):
-        estadoEstacionamientoInicial = [[0 for x in xrange(8)] for x in xrange(5)]
-        estadoEstacionamientoFinal = [[0 for x in xrange(8)] for x in xrange(5)] 
+        estadoEstacionamientoInicial = [[0 for x in range(8)] for x in range(5)]
+        estadoEstacionamientoFinal = [[0 for x in range(8)] for x in range(5)] 
         horaSalida=6
         puesto=3
         placa=1234
@@ -378,8 +378,8 @@ class Test(unittest.TestCase):
         self.assertEqual(resultado,resultadoF)
         
     def testDesocuparUnicoPuestoOcupado(self):
-        estadoEstacionamientoInicial = [[0 for x in xrange(8)] for x in xrange(5)]
-        estadoEstacionamientoFinal = [[0 for x in xrange(8)] for x in xrange(5)] 
+        estadoEstacionamientoInicial = [[0 for x in range(8)] for x in range(5)]
+        estadoEstacionamientoFinal = [[0 for x in range(8)] for x in range(5)] 
         horaSalida=6
         puesto=3
         placa=1234
@@ -394,8 +394,8 @@ class Test(unittest.TestCase):
         self.assertEqual(resultado,resultadoF)
         
     def testDesocuparUnicoPuestoReservadoOcupado(self):
-        estadoEstacionamientoInicial = [[0 for x in xrange(8)] for x in xrange(5)]
-        estadoEstacionamientoFinal = [[0 for x in xrange(8)] for x in xrange(5)] 
+        estadoEstacionamientoInicial = [[0 for x in range(8)] for x in range(5)]
+        estadoEstacionamientoFinal = [[0 for x in range(8)] for x in range(5)] 
         horaSalida=6
         puesto=3
         placa=1234
@@ -415,12 +415,12 @@ class Test(unittest.TestCase):
         self.assertEqual(resultado,resultadoF)
         
     def testDesocuparUnicoPuestoOcupadoTodoElDia(self):
-        estadoEstacionamientoInicial = [[0 for x in xrange(8)] for x in xrange(5)] 
-        estadoEstacionamientoFinal = [[0 for x in xrange(8)] for x in xrange(5)] 
+        estadoEstacionamientoInicial = [[0 for x in range(8)] for x in range(5)] 
+        estadoEstacionamientoFinal = [[0 for x in range(8)] for x in range(5)] 
         horaSalida=6
         puesto=1
         placa=1234
-        for x in xrange(horaSalida+1):
+        for x in range(horaSalida+1):
             estadoEstacionamientoInicial[puesto][x]=1
         placaPuesto={}
         placaPuesto[placa]=puesto
@@ -440,9 +440,9 @@ class Test(unittest.TestCase):
         horaSalida=6
         puesto=1
         placa=1234
-        for x in xrange(horaSalida+1):
+        for x in range(horaSalida+1):
             estadoEstacionamientoInicial[puesto][x]=1
-        for x in xrange(12):
+        for x in range(12):
             estadoEstacionamientoInicial[puesto+1][x]=1
             estadoEstacionamientoFinal[puesto+1][x]=1
         placaPuesto={}
